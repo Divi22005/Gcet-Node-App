@@ -1,11 +1,17 @@
 import express from 'express';
 import cors from 'cors';
+import mongoose from 'mongoose';
 
 const app = express();
 const PORT = 8080;
 
 app.use(cors());
 app.use(express.json());
+
+const userSchema = new mongoose.Schema({
+  name: String,
+});
+const User = mongoose.model('User', userSchema);
 
 const productList = [
   { id: 1, name: 'Laptop', price: 1000 },
@@ -18,6 +24,7 @@ app.get('/products', (req, res) => {
 });
 
 app.listen(PORT, () => {
+  mongoose.Connect('mongodb://localhost:27017/gcet');
   console.log(`Server running at http://localhost:${PORT}`);
 });
 
@@ -35,4 +42,9 @@ app.get('/name', (req, res) => {
 
 app.get('/weather', (req, res) => {
   res.json({ temp: "31°C", condition: "Sunny" });
+});
+
+app.get('/register', async (req, res) => {
+  const result = await User.insertOne({ name: 'jhon' });
+  res.json(result);
 });
