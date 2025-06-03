@@ -13,9 +13,8 @@ const productList = [
   { id: 3, name: 'Tablet', price: 300 }
 ];
 
-// Return JSON instead of formatted string
 app.get('/products', (req, res) => {
-  res.json(productList); // This sends the array as proper JSON
+  res.json(productList);
 });
 
 app.listen(PORT, () => {
