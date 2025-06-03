@@ -16,4 +16,10 @@ userRouter.post("/login", async (req, res) => {
   return res.json(result);
 });
 
-export default userRouter
+userRouter.get("/id", async (req, res) => {
+  const email = req.params.email;
+  const result = await userModel.findOne({ email: email });
+  if (!result) return res.json({ message: "User not found" });
+  return res.json(result);
+});
+export default userRouter;
