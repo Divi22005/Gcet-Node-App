@@ -24,7 +24,7 @@ app.get('/products', (req, res) => {
 });
 
 app.listen(PORT, () => {
-  mongoose.Connect('mongodb://localhost:27017/gcet');
+  mongoose.connect('mongodb://localhost:27017/gcet');
   console.log(`Server running at http://localhost:${PORT}`);
 });
 
