@@ -44,7 +44,8 @@ app.get('/weather', (req, res) => {
   res.json({ temp: "31°C", condition: "Sunny" });
 });
 
-app.get('/register', async (req, res) => {
+app.post('/register', async (req, res) => {
+  const { name } = req.query;
   const result = await User.insertOne({ name: 'jhon' });
   res.json(result);
 });
