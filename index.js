@@ -12,13 +12,15 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const MONGO_URI = process.env.MONGO_URI
+const DBUSER = encodeURIComponent(process.env.DBUSER)
+const DBPASS = encodeURIComponent(process.env.DBPASS)
+const MONGO_URI =`mongodb+srv://${DBUSER}:${DBPASS}@cluster0.e3jawml.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0`
 
+// const MONGO_URI = process.env.MONGO_URI
+//testing
 app.use("/users", userRouter);
 app.use("/products", productRouter);
 app.use("/orders",orderRouter)
-
-console.log("MONGO_URI:", process.env.MONGO_URI);
 
 mongoose
   .connect(MONGO_URI)
