@@ -18,6 +18,8 @@ app.use("/users", userRouter);
 app.use("/products", productRouter);
 app.use("/orders",orderRouter)
 
+console.log("MONGO_URI:", process.env.MONGO_URI);
+
 mongoose
   .connect(MONGO_URI)
   .then(() => {
