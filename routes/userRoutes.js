@@ -1,14 +1,16 @@
 import express from "express";
+import bcrypt from "bcryptjs";
 import userModel from "../models/userModel.js";
 
 const userRouter = express.Router();
 
 userRouter.post("/register", async (req, res) => {
   const { name, email, pass } = req.body;
+  const hashePassword =await bcrypt.hashpass(pass, 10);
   const result = await userModel.insertOne({
     name: name,
     email: email,
-    pass: pass,
+    pass: hashePassword,
   });
   return res.json(result);
 });
